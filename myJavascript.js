@@ -77,10 +77,10 @@ function loadEvents(filename) {
             for (i = 0; i < items.length; i++) {
 
                 //Lataa kuvan
-               for (j = 0; j < items2.length; j++) {
+               /*for (j = 0; j < items2.length; j++) {
                     pic = items2[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
                    return pic;
-                }
+                }*/
                 
             
                 //lataa linkin
