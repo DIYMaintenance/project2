@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="eng">
+<HTML lang="en">
 
 <head>
-	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-	<title>Project2</title>
-
-	<!-- CSS file: -->
+	<title>Project 2</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" href="styles.css">
 
 	<!-- Import font -->
@@ -15,19 +13,29 @@
 </head>
 
 <body>
+	<h1 class="text-gran">New Movies in Theaters Now</h1>
+	<h3>Select theater from menu</h3>
+	<div id="pageContent" class="center">
+		<div id="theathersButton">
+			<input type="button" name="Fetch3" id="Fetch3a" value="Load All Cinemas" onclick="loadCinemas('https://www.finnkino.fi/xml/TheatreAreas/')">
+			<div id="theaters">
+			</div>
+		  </div>
+		  <div id="eventsButton">
+			<input type="button" name="Fetch4" id="Fetch4a" value="Load All Events" onclick="loadEvents('https://www.finnkino.fi/xml/Events/')">
+			<div id="events">
+			</div>
+		  </div>
+		  <div id="ScheduleButton">
+			<input type="button" name="Fetch5" id="Fetch5a" value="Load All Schedule" onclick="loadSchedule('https://www.finnkino.fi/xml/Schedule/')">
+			<div id="schedules">
+			</div>
+		  </div>
+		<div id="contentBox" class="gradie">
 
-	<input type="button" name="Fetch3" id="Fetch3b" value="Theaters" onclick="loadAndParseNews('https://www.finnkino.fi/xml/TheatreAreas/')">
-	<div id="newsfeed">
+		</div>
 	</div>
-	<ul id="ulList">
-		
 
-	</ul>
-	  <!-- Page content -->
-		<!-- Title -->
-		<h1>Project2</h1>
-
-	<!-- JavaScript file: -->
 	<script src="myJavascript.js"></script>
 </body>
 
