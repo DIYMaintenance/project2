@@ -54,3 +54,8 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+/* Pulldown menu */
+#pullDown {
+    border-radius: 5px;
+    padding: 5px;
+}

@@ -1,3 +1,42 @@
+// Pulldown menu content
+function loadTheatre(filename) {
+
+    var x = document.getElementById("Theatre");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+    var xmlhttpCinemas = new XMLHttpRequest();
+    // We replace the statif file with URL
+    //
+    xmlhttpCinemas.open("GET", filename, true);
+    xmlhttpCinemas.send();
+    xmlhttpCinemas.onreadystatechange = function () {
+
+        var xmlDocCinemas = xmlhttpCinemas.responseXML;
+
+        // Once again we find some tags from our variable containing XML
+        var items = xmlDocCinemas.getElementsByTagName("TheatreArea");
+        // And since they are arrays, we use for loop to travel through them
+        // I wanted to display results in a table so im creating table tags and table cells
+        //
+        //
+        var item, feedlink, name, content = '';
+        for (i = 1; i < items.length; i++) {
+            feedlink = items[i].getElementsByTagName('ID').item(0).firstChild.nodeValue;
+            name = items[i].getElementsByTagName('Name').item(0).firstChild.nodeValue;
+            item = '<select id ="pullDown">' + name + '</select>';
+            item = '<a href="' + feedlink + '">' + name + '</a>';
+            content += item;
+            console.log(name);
+        }
+        // Finally we place the contents in a div
+        document.getElementById("Theatre").innerHTML = "<option>" + content + "</option>";
+    }
+}
+// Cinemas function
+
 function loadCinemas(filename) {
     var x = document.getElementById("theaters");
     if (x.style.display === "none") {
@@ -68,30 +107,27 @@ function loadEvents(filename) {
             console.log(xmlDocEvents);
             // Once again we find some tags from our variable containing XML
             var items = xmlDocEvents.getElementsByTagName("Event");
-            var items2 = xmlDocEvents.getElementsByTagName("Images");
             // And since they are arrays, we use for loop to travel through them
             // I wanted to display results in a table so im creating table tags and table cells
             //
             //
-            var item, feedlink, name, description, content, pic = '';
+
+            var item, feedlink, name, description, content, pic, pic2 = '';
             for (i = 0; i < items.length; i++) {
 
-                //Lataa kuvan
-               /*for (j = 0; j < items2.length; j++) {
-                    pic = items2[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
-                   return pic;
-                }*/
-                
-            
-                //lataa linkin
-                feedlink = items[i].getElementsByTagName('EventURL').item(0).firstChild.nodeValue;
-                name = items[i].getElementsByTagName('Title').item(0).firstChild.nodeValue;
-                description = items[i].getElementsByTagName('ShortSynopsis').item(0).firstChild.nodeValue;
-
-                // lisää nimen ja kuvauksen diviin
-                item = '<div id="contentBox" class="gradie"><img src="' + pic + '"><h3> ' + name + ' </h3><p> ' + description + ' </p><a href="' + feedlink + '">' + name + '</a></div>';
+                //load movie info
+                feedlink = items[i].getElementsByTagName('EventURL')[0].firstChild.nodeValue;
+                name = items[i].getElementsByTagName('Title')[0].firstChild.nodeValue;
+                rate = items[i].getElementsByTagName('RatingImageUrl')[0].firstChild.nodeValue;
+                pic = items[1].getElementsByTagName("Images")[0].childNodes[1];
+                pic2 = pic.childNodes[0];
+                //EI TOIMI ENÄÄ!!!
+                //description = items[i].getElementsByTagName('ShortSynopsis').item(0).firstChild.nodeValue;
+                // add info to div
+                item = '<div id="contentBox" class="gradie"><img src="' + pic2 + '"><img src="' + rate + '"><h3> ' + name + ' </h3><p> ' + description + ' </p><a href="' + feedlink + '">' + name + '</a></div>';
                 content += item;
             }
+            console.log(pic2);
             // Finally we place the contents in a div
             document.getElementById("events").innerHTML = "<ul>" + content + "</ul>";
         }
@@ -128,11 +164,12 @@ function loadSchedule(filename) {
             // I wanted to display results in a table so im creating table tags and table cells
             //
             //
-            var item, feedlink, name, description, content, pic = '';
+            var item, content, pic = '';
             for (i = 1; i < items.length; i++) {
 
                 pic = items[i].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
-                item = '<img src="'+ pic + '">';
+
+                item = '<img src="' + pic + '">';
                 content += item;
             }
             // Finally we place the contents in a div
