@@ -1,84 +1,36 @@
-// Pulldown menu content
-function loadTheatre(filename) {
-
-    var x = document.getElementById("Theatre");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
+document.getElementById("pullDown").addEventListener("click", loadMenu);
+// Load XML to memory
+function loadMenu(){
+var xmlhttpCinemas = new XMLHttpRequest();
+// We replace the statif file with URL
+//
+xmlhttpCinemas.open("GET", "https://www.finnkino.fi/xml/TheatreAreas/", true);
+xmlhttpCinemas.send();
+xmlhttpCinemas.onreadystatechange = function () {
+    // If we are still loading...
+    if (xmlhttpCinemas.readyState === 1) {
+        document.getElementById("theaters").innerHTML = "Loading...";
     }
-    var xmlhttpCinemas = new XMLHttpRequest();
-    // We replace the statif file with URL
-    //
-    xmlhttpCinemas.open("GET", filename, true);
-    xmlhttpCinemas.send();
-    xmlhttpCinemas.onreadystatechange = function () {
-
+    // If everything is ok
+    if (xmlhttpCinemas.readyState === 4 && xmlhttpCinemas.status === 200) {
+        // Instead of just placing the RAW XML content we need to parse it
+        //document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+        //
         var xmlDocCinemas = xmlhttpCinemas.responseXML;
-
-        // Once again we find some tags from our variable containing XML
+        console.log(xmlDocCinemas);
         var items = xmlDocCinemas.getElementsByTagName("TheatreArea");
-        // And since they are arrays, we use for loop to travel through them
-        // I wanted to display results in a table so im creating table tags and table cells
-        //
-        //
-        var item, feedlink, name, content = '';
-        for (i = 1; i < items.length; i++) {
-            feedlink = items[i].getElementsByTagName('ID').item(0).firstChild.nodeValue;
-            name = items[i].getElementsByTagName('Name').item(0).firstChild.nodeValue;
-            item = '<select id ="pullDown">' + name + '</select>';
-            item = '<a href="' + feedlink + '">' + name + '</a>';
-            content += item;
-            console.log(name);
-        }
-        // Finally we place the contents in a div
-        document.getElementById("Theatre").innerHTML = "<option>" + content + "</option>";
+        var theathers, theatherslist = '';
+        for (i = 0; i < items.length; i++) {
+            theathers = items[i].getElementsByTagName('Name').item(0).firstChild.nodeValue;
+            var item = '<option>' + theathers + '</option>';
+            theatherslist += item;
+                
     }
 }
-// Cinemas function
 
-function loadCinemas(filename) {
-    var x = document.getElementById("theaters");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-    var xmlhttpCinemas = new XMLHttpRequest();
-    // We replace the statif file with URL
-    //
-    xmlhttpCinemas.open("GET", filename, true);
-    xmlhttpCinemas.send();
-    xmlhttpCinemas.onreadystatechange = function () {
-        // If we are still loading...
-        if (xmlhttpCinemas.readyState === 1) {
-            document.getElementById("theaters").innerHTML = "Loading...";
-        }
-        // If everything is ok
-        if (xmlhttpCinemas.readyState === 4 && xmlhttpCinemas.status === 200) {
-            // Instead of just placing the RAW XML content we need to parse it
-            //document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
-            //
-            var xmlDocCinemas = xmlhttpCinemas.responseXML;
-            console.log(xmlDocCinemas);
-            // Once again we find some tags from our variable containing XML
-            var items = xmlDocCinemas.getElementsByTagName("TheatreArea");
-            // And since they are arrays, we use for loop to travel through them
-            // I wanted to display results in a table so im creating table tags and table cells
-            //
-            //
-            var item, feedlink, name, description, content = '';
-            for (i = 1; i < items.length; i++) {
-                feedlink = items[i].getElementsByTagName('ID').item(0).firstChild.nodeValue;
-                name = items[i].getElementsByTagName('Name').item(0).firstChild.nodeValue;
-                item = '<li>' + name + '</li>';
-                item = '<li><a href="' + feedlink + '">' + name + '</a></li>';
-                content += item;
-            }
-            // Finally we place the contents in a div
-            document.getElementById("theaters").innerHTML = "<ul>" + content + "</ul>";
-        }
-    }
+    console.log(theatherslist)
+    document.getElementById("pullDown").innerHTML = theatherslist;
+}
 }
 
 function loadEvents(filename) {
@@ -108,10 +60,8 @@ function loadEvents(filename) {
             // Once again we find some tags from our variable containing XML
             var items = xmlDocEvents.getElementsByTagName("Event");
             // And since they are arrays, we use for loop to travel through them
-            // I wanted to display results in a table so im creating table tags and table cells
             //
             //
-
             var item, feedlink, name, description, content, pic, pic2 = '';
             for (i = 0; i < items.length; i++) {
 
@@ -119,15 +69,17 @@ function loadEvents(filename) {
                 feedlink = items[i].getElementsByTagName('EventURL')[0].firstChild.nodeValue;
                 name = items[i].getElementsByTagName('Title')[0].firstChild.nodeValue;
                 rate = items[i].getElementsByTagName('RatingImageUrl')[0].firstChild.nodeValue;
-                pic = items[1].getElementsByTagName("Images")[0].childNodes[1];
-                pic2 = pic.childNodes[0];
+
+                //pic = items[i].getElementsByTagName('Images')[0].childNodes[1].firstChild.nodeValue;
+                //pic2 = pic.getElementByTagName('EventSmallImagePortrait');
+                console.log(pic);
                 //EI TOIMI ENÄÄ!!!
-                //description = items[i].getElementsByTagName('ShortSynopsis').item(0).firstChild.nodeValue;
+                //description = items[i].getElementsByTagName('ShortSynopsis')[0].firstChild.nodeValue;
+            
                 // add info to div
-                item = '<div id="contentBox" class="gradie"><img src="' + pic2 + '"><img src="' + rate + '"><h3> ' + name + ' </h3><p> ' + description + ' </p><a href="' + feedlink + '">' + name + '</a></div>';
-                content += item;
+                item = '<div id="contentBox" class="gradie"><img src="' + pic + '"><img src="' + rate + '"><h3> ' + name + ' </h3><p> ' + description + ' </p><a href="' + feedlink + '">' + name + '</a></div>';
+                content += item;       
             }
-            console.log(pic2);
             // Finally we place the contents in a div
             document.getElementById("events").innerHTML = "<ul>" + content + "</ul>";
         }
@@ -167,7 +119,7 @@ function loadSchedule(filename) {
             var item, content, pic = '';
             for (i = 1; i < items.length; i++) {
 
-                pic = items[i].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
+                pic = items[i].getElementsByTagName('EventSmallImagePortrait')[0].firstChild.nodeValue;
 
                 item = '<img src="' + pic + '">';
                 content += item;

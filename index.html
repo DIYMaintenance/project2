@@ -18,24 +18,14 @@
 	<div id="pageContent" class="center">
 
 		<!-- Pulldown menu-->
-		<select name="pullDown" id="pullDown" onchange="loadTheatre('https://www.finnkino.fi/xml/TheatreAreas/')">
-			<option value="valitse">Choose Theatre</option>
+		<select name="pullDown" id="pullDown">
+			<option value="valitse">Valitse alue/teatteri</option>
 
 		</select>
 
-		<div id="theathersButton">
-			<input type="button" name="Fetch3" id="Fetch3a" value="Load All Cinemas" onclick="loadCinemas('https://www.finnkino.fi/xml/TheatreAreas/')">
-			<div id="theaters">
-			</div>
-		</div>
 		<div id="eventsButton">
 			<input type="button" name="Fetch4" id="Fetch4a" value="Load All Events" onclick="loadEvents('https://www.finnkino.fi/xml/Events/')">
 			<div id="events">
-			</div>
-		</div>
-		<div id="ScheduleButton">
-			<input type="button" name="Fetch5" id="Fetch5a" value="Load All Schedule" onclick="loadSchedule('https://www.finnkino.fi/xml/Schedule/')">
-			<div id="schedules">
 			</div>
 		</div>
 		<div id="contentBox" class="gradie">
