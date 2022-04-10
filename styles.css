@@ -63,6 +63,11 @@ p {
     padding: 5px;
     width: 200px;
 }
+#moviesearch {
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+}
 .image{
     float:left;
 }
