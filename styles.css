@@ -16,6 +16,9 @@ p {
    color:rgb(136, 136, 136);
    padding:10px; 
 }
+.genre{
+    text-align: right;
+}
 .dropdown {
     display: inline-block;
     position: relative;
@@ -59,4 +62,13 @@ p {
     border-radius: 5px;
     padding: 5px;
     width: 200px;
+}
+.image{
+    float:left;
+}
+.rate{
+    float: right;
+}
+a {
+    text-decoration:none;
 }
