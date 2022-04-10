@@ -13,22 +13,25 @@
 </head>
 
 <body>
-	<h1 class="text-gran">Movies in Theaters Now</h1>
+	<h1 class="text-gran">New Movies in Theaters Now</h1>
 	<h3>Select theater from menu</h3>
 	<div id="pageContent" class="center">
 
 		<!-- Pulldown menu-->
 		<select name="pullDown" id="pullDown">
-			<option value="valitse">Valitse alue/teatteri</option>
+			<option value="valitse"> Valitse teatteri: </option>
+
 		</select>
+		<input id="moviesearch"/><input type="button" name="movie" id="movie1" value="Search" onclick="findMovies()">
 
 		<div id="eventsButton">
-			<input type="button" id="getButton" name="Fetch4a" id="Fetch4aa" value="Hae teatterissa pyörivät elokuvat">
+			<input type="button" id="Button" name="Fetch4a" id="Fetch4aa" value="Hae teatterissa pyörivät elokuvat">
 			<div id="schedules">
-
-			</div>  
+			</div>
 		</div>
-		
+		<div id="contentBox" class="gradie">
+
+		</div>
 	</div>
 
 	<script src="myJavascript.js"></script>
