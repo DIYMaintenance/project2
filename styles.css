@@ -70,6 +70,7 @@ p {
 }
 .image{
     float:left;
+    border-radius: 5px;
 }
 .rate{
     float: right;

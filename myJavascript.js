@@ -1,6 +1,7 @@
 loadMenu()
 document.getElementById("pullDown").addEventListener("click", catFunction());
 document.getElementById("Button").addEventListener("click", getData);
+document.getElementById("movie1").addEventListener("click", findMovies);
 // Load XML to memory
 function loadMenu() {
     var xmlhttpCinemas = new XMLHttpRequest();
@@ -95,7 +96,8 @@ function getData() {
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
+                    theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
+                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong>Teatteri: </strong><br>' + theathrename + '</p>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
                     content += item;
                 } else {
                     console.log("skipped");
