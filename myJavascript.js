@@ -25,14 +25,15 @@ function loadSynopsis() {
                 data_array.push(my_object);
             }
             console.log("Arr done.");
-            console.log(data_array);
+            //console.log(data_array);
+            getData(data_array);
         }
     }
 }
 
     //Event listeners
     document.getElementById("pullDown").addEventListener("click", catFunction());
-    document.getElementById("Button").addEventListener("click", getData);
+    document.getElementById("Button").addEventListener("click", loadSynopsis);
     document.getElementById("movie1").addEventListener("click", findMovies);
 
     // Load XML to memory
@@ -84,7 +85,7 @@ function loadSynopsis() {
     }
 
     //GetData function gets data from that theather which is selected from pulldownmenu
-    function getData() {
+    function getData(a) {
         selectElement = document.querySelector('#pullDown');
         output = selectElement.options[selectElement.selectedIndex].value;
         console.log(output);
@@ -111,7 +112,8 @@ function loadSynopsis() {
                 //
                 //
                 var item, content, pic, name, rate, feedlink, movie, genre, time = '';
-
+                var synopsis = a;
+                console.log(synopsis);
                 for (j = 1; j < items.length; j++) {
 
                     name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
