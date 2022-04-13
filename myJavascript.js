@@ -8,6 +8,8 @@ document.getElementById("Button").addEventListener("click", (evt) => loadSynopsi
 document.getElementById("movie1").addEventListener("click", (evt) => loadSynopsis(b = "ManualSearch"));
 
 function loadSynopsis(b) {
+    document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
+    document.getElementById("pullDown").style.borderColor = "inherit"; //Changes pulldownmenu bordercolor back to normal.
     var xmlhttp = new XMLHttpRequest();
     //Getting XML file from Finnkino Events 
     xmlhttp.open("GET", "https://www.finnkino.fi/xml/Events/", true);
@@ -129,7 +131,6 @@ function getData(a) {
                 name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
                 //if the film is in a performance at that theater, its details will be printed id div "contentbox"
                 if (name == output) {
-                    document.getElementById("pullDown").style.borderColor = "inherit"; //Changes pulldownmenu bordercolor back to normal.
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
@@ -207,7 +208,6 @@ function findMovies(data) {
                 genreSearchlower = genreSearch.toLowerCase(); //Variable genreSearch is converted to lowercase
                 //If title match searchfield text fully or partiatly, it will print movie details below in "contentbox" -div
                 if ((namelower.match(xlower) || genreSearchlower.match(xlower)) && xlower.length != "") {
-                    document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
