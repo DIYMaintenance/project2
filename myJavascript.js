@@ -29,11 +29,36 @@ function loadSynopsis() {
         }
     }
 }
-
+function loadOnSearchSynopsis() {
+    var xmlhttp = new XMLHttpRequest();
+    //Getting XML file from Finnkino Events 
+    xmlhttp.open("GET", "https://www.finnkino.fi/xml/Events/", true);
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 1) {
+            console.log("Loading XML...");
+        }
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            console.log("XML downloaded, filtering arraylist with title and synopsis...")
+            var xmlDoc = xmlhttp.responseXML;
+            var items = xmlDoc.getElementsByTagName("Event");
+            var data_array = [];
+            for (i = 0; i < items.length; i++) {
+                var my_object = {};
+                my_object["title"] = items[i].getElementsByTagName('Title').item(0).firstChild.nodeValue;
+                my_object["synopsis"] = items[i].getElementsByTagName('ShortSynopsis').item(0).firstChild.nodeValue;
+                data_array.push(my_object);
+            }
+            console.log("Arr done.");
+            //console.log(data_array);
+            findMovies(data_array);
+        }
+    }
+}
     //Event listeners
     document.getElementById("pullDown").addEventListener("click", catFunction());
     document.getElementById("Button").addEventListener("click", loadSynopsis);
-    document.getElementById("movie1").addEventListener("click", findMovies);
+    document.getElementById("movie1").addEventListener("click", loadOnSearchSynopsis);
 
     // Load XML to memory
     function loadMenu() {
@@ -139,7 +164,7 @@ function loadSynopsis() {
                         }
                     }
                         item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synop + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
-                        content += item
+                        content += item;
                     
                     } else {
                         //If film is not in theater, it will be skipped and details not shown.
@@ -205,8 +230,8 @@ function loadSynopsis() {
                          }
                      }
 
-                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a><a href="' + feedlink + '">' + name + '</a><p><strong>Teatteri: </strong><br>' + theathrename + '</p><p>' + synop + '</p><p><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
-                        content += item;
+                     item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synop + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
+                     content += item;
                     } else {
                         //if not, then nothing is showed and textbox border goes red.
                         document.getElementById("moviesearch").style.borderColor = "red";
