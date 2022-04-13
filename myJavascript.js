@@ -125,7 +125,7 @@ function getData(a) {
             //
             var item, content, pic, name, rate, feedlink, movie, genre, time, synopsis = '';
             var synopsisMovie = a;
-            for (j = 1; j < items.length; j++) {
+            for (j = 0; j < items.length; j++) {
 
                 name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
                 //if the film is in a performance at that theater, its details will be printed id div "contentbox"
@@ -154,7 +154,7 @@ function getData(a) {
             }
             //This removes unwanted "undefined" texts from the page.
             if (typeof content !== 'undefined') {
-                document.getElementById("schedules").innerHTML = "<ul>" + content + "</ul>";
+               document.getElementById("schedules").innerHTML = "<ul>" + content + "</ul>";
             } else {
                 console.log("Tyhjää");
             }
@@ -186,7 +186,7 @@ function findMovies(data) {
             // alustetaan muuttuja tekstillä latauksen ajaksi
             var synopsis = "Odotappa hetkinen...";
             //console.log(synopsisData);
-            for (j = 1; j < items.length; j++) {
+            for (j = 0; j < items.length; j++) {
                 // Haetaan nimi jolla verrataan haussa
                 name = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                 // Haetaan kategoria, jolla verrataan haussa
