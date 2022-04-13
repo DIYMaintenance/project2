@@ -51,6 +51,8 @@ p {
 /* center div */
 .center {
     margin: auto;
+    width: 90%;
+    padding: 10px;
 }
 
 /* Gradient text  */
@@ -119,6 +121,3 @@ a {
     transition-duration: 0.4s;
 }
 /* centering fields */
-#eventsButton {
-    text-align: center;
-}
