@@ -8,10 +8,14 @@ h1 {
     color: rgb(136, 136, 136);
     text-align: center;
 }
-
+h4 {
+    color: rgb(58, 126, 41);
+    text-align: center;
+}
 h3 {
     color: rgb(58, 126, 41);
     text-align: center;
+    width: 80%;
 }
 p {
    color:rgb(136, 136, 136);
