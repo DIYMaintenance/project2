@@ -14,18 +14,19 @@
 
 <body>
 	<h1 class="text-gran">Movies in Theaters Now</h1>
-	<h3>Select theater from menu</h3>
+	<h3>Valitse teatteri tai käytä hakua</h3>
 	<div id="pageContent" class="center">
-
+		<div id="eventsButton">
 		<!-- Pulldown menu-->
 		<select name="pullDown" id="pullDown">
 			<option value="valitse"> Valitse teatteri: </option>
-
 		</select>
-		<input id="moviesearch"/><input type="button" name="movie" id="movie1" value="Search">
+			<input type="button" class="buttons" id="Button" name="Fetch4a" value="Hae teatterissa pyörivät elokuvat">
+		
+		<input id="moviesearch" placeholder="Nimi tai kategoria"/><input type="button" class="buttons" name="movie" id="movie1" value="Etsi">
 
-		<div id="eventsButton">
-			<input type="button" id="Button" name="Fetch4a" id="Fetch4aa" value="Hae teatterissa pyörivät elokuvat">
+		
+			
 			<div id="schedules">
 			</div>
 		</div>

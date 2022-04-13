@@ -2,7 +2,9 @@
 loadMenu()
 //Event listeners
 document.getElementById("pullDown").addEventListener("click", catFunction());
+// Get data eventlistener
 document.getElementById("Button").addEventListener("click", (evt) => loadSynopsis(b = "pulldown"));
+// Search eventlistener
 document.getElementById("movie1").addEventListener("click", (evt) => loadSynopsis(b = "ManualSearch"));
 
 function loadSynopsis(b) {
@@ -181,6 +183,7 @@ function findMovies(data) {
             //
             var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, genreSearch = '';
             var synopsisMovie = data;
+            // alustetaan muuttuja tekstillä latauksen ajaksi
             var synopsis = "Odotappa hetkinen...";
             //console.log(synopsisData);
             for (j = 1; j < items.length; j++) {

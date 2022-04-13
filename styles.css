@@ -61,26 +61,64 @@ p {
 }
 /* Pulldown menu */
 #pullDown {
+    font-family: 'Ubuntu', sans-serif;
     border-radius: 5px;
     padding: 5px;
     width: 200px;
+    margin-bottom: 10px;
 }
-#moviesearch {
-    border-radius: 5px;
-    padding: 5px;
-    width: 200px;
-}
+/* Image Style */
 .image{
     float:left;
     border-radius: 5px;
 }
+/*Rate image*/
 .rate{
     float: right;
 }
+/* Links */
 a {
     text-decoration:none;
 }
+/* Showtime */
 .time {
     color: rgb(58, 126, 41);
     text-align: left;
+}
+/* Searchbox button */
+#movie1{   
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 5px;
+}
+/* buttons hover effect */
+.buttons:hover {
+    background-color: rgb(107, 2, 2);
+    color: white;
+}
+/* get events button */
+#Button {
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding: 5px;
+}
+/* Searchbox style */
+#moviesearch {
+    font-family: 'Ubuntu', sans-serif;
+    border-radius: 5px;
+    padding: 5px;
+    width: 200px;
+}
+/* buttons hover effect */
+.buttons {
+    background-color: white;
+    transition-duration: 0.4s;
+}
+/* centering fields */
+#eventsButton {
+    text-align: center;
 }
