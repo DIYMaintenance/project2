@@ -14,10 +14,11 @@ h3 {
 }
 p {
    color:rgb(136, 136, 136);
-   padding:10px; 
+   padding:10px;
 }
 .genre{
     text-align: right;
+    color: rgb(58, 126, 41);
 }
 .dropdown {
     display: inline-block;
@@ -77,4 +78,8 @@ p {
 }
 a {
     text-decoration:none;
+}
+.time {
+    color: rgb(58, 126, 41);
+    text-align: left;
 }

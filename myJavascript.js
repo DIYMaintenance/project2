@@ -1,6 +1,5 @@
 //Calling function that will load theathers to theather selection pulldownmenu.
 loadMenu()
-
 //Tässä ladataan synopsis lista, mikä sisältää arraylistin, missä on kaksi objektia per rivi: title ja synopsis. Oli tarkoituksena tehdä getDataan() for lause, 
 //mikä käy sitten läpi tämän listan ja vertailee että jos title täsmää, niin tulostetaan synopsis divin sisään. Mutta tälle on niin vitun vaikeeta saada tuo "data_array lista tuon 
 //funktion ulkopuolelle niin antaa olla :D" Synopsis listan saat ladattua konsolista kirjoittamalla loadSynopsis() ja se tulee hienosti esiin mutta helvetti miten vaikeaa.
@@ -114,6 +113,8 @@ function loadSynopsis() {
                 var item, content, pic, name, rate, feedlink, movie, genre, time = '';
                 var synopsis = a;
                 console.log(synopsis);
+                var synop = '';
+                
                 for (j = 1; j < items.length; j++) {
 
                     name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
@@ -126,14 +127,26 @@ function loadSynopsis() {
                         genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                         time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
                         theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
-                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong>Teatteri: </strong><br>' + theathrename + '</p>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
-                        content += item;
 
+                        // Hakee nimen perusteella oikean kuvauksen
+                        for (var i = 0; i < synopsis.length; i++){
+                           
+                           if (synopsis[i].title == movie){
+                            tit = synopsis[i].title;
+                            synop = synopsis[i].synopsis;
+                           
+                            console.log(tit + synop);
+                        }
+                    }
+                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synop + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
+                        content += item
+                    
                     } else {
                         //If film is not in theater, it will be skipped and details not shown.
                         console.log("skipped");
                     }
-
+                    
+                    //console.log(getSynop);
                 }
                 //This removes unwanted "undefined" texts from the page.
                 if (typeof content !== 'undefined') {
@@ -146,7 +159,7 @@ function loadSynopsis() {
     }
 
     //Function for manual textfield search.
-    function findMovies() {
+    function findMovies(a) {
         var x = document.getElementById("moviesearch").value;
         var xmlhttpSchedule = new XMLHttpRequest();
         // We replace the statif file with URL
@@ -165,6 +178,9 @@ function loadSynopsis() {
                 // I wanted to display results in a table so im creating table tags and table cells
                 //
                 var theathrename, item, content, pic, name, rate, feedlink, movies, genre, time = '';
+                var synopsis = a;
+                console.log(synopsis);
+                var synop = '';
                 for (j = 1; j < items.length; j++) {
 
                     name = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
@@ -177,7 +193,19 @@ function loadSynopsis() {
                         genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                         time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
                         theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
-                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong>Teatteri: </strong><br>' + theathrename + '</p>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
+
+                        // Hakee nimen perusteella oikean kuvauksen
+                        for (var i = 0; i < synopsis.length; i++){
+                           
+                            if (synopsis[i].title == movies){
+                             tit = synopsis[i].title;
+                             synop = synopsis[i].synopsis;
+                            
+                             console.log(tit + synop);
+                         }
+                     }
+
+                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movies + '</h3></a><a href="' + feedlink + '">' + name + '</a><p><strong>Teatteri: </strong><br>' + theathrename + '</p><p>' + synop + '</p><p><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
                         content += item;
                     } else {
                         //if not, then nothing is showed and textbox border goes red.
