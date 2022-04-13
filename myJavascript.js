@@ -1,9 +1,5 @@
 //Calling function that will load theathers to theather selection pulldownmenu.
 loadMenu()
-
-//Tässä ladataan synopsis lista, mikä sisältää arraylistin, missä on kaksi objektia per rivi: title ja synopsis. Oli tarkoituksena tehdä getDataan() for lause, 
-//mikä käy sitten läpi tämän listan ja vertailee että jos title täsmää, niin tulostetaan synopsis divin sisään. Mutta tälle on niin vitun vaikeeta saada tuo "data_array lista tuon 
-//funktion ulkopuolelle niin antaa olla :D" Synopsis listan saat ladattua konsolista kirjoittamalla loadSynopsis() ja se tulee hienosti esiin mutta helvetti miten vaikeaa.
 //Event listeners
 document.getElementById("pullDown").addEventListener("click", catFunction());
 document.getElementById("Button").addEventListener("click", (evt) => loadSynopsis(b = "pulldown"));
@@ -204,7 +200,7 @@ function findMovies(data) {
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
-                        if (synopsisMovie[i].title){
+                        if (synopsisMovie[i].title.match(x)){
                             synopsis = synopsisMovie[i].synopsis;
 
                         } else {
