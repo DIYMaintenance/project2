@@ -100,7 +100,6 @@ function toUniqueArray(a) {
 function getData(a) {
     selectElement = document.querySelector('#pullDown');
     output = selectElement.options[selectElement.selectedIndex].value;
-    console.log(output);
     var xmlhttpSchedule = new XMLHttpRequest();
     // We replace the statif file with URL
     //
@@ -123,13 +122,14 @@ function getData(a) {
             // I wanted to display results in a table so im creating table tags and table cells
             //
             //
-            var item, content, pic, name, rate, feedlink, movie, genre, time, synopsis = '';
+            var item, content, pic, name, rate, feedlink, movie, genre, time, synopsis = "";
             var synopsisMovie = a;
             for (j = 0; j < items.length; j++) {
 
                 name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
                 //if the film is in a performance at that theater, its details will be printed id div "contentbox"
                 if (name == output) {
+                    document.getElementById("pullDown").style.borderColor = "inherit"; //Changes pulldownmenu bordercolor back to normal.
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
@@ -143,20 +143,29 @@ function getData(a) {
                             synopsis = synopsisMovie[i].synopsis;
 
                         } else {
-                            console.log("Skip");
+                            //pass
                         }
 
                     }
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
+
+                    item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
                     content += item;
-                } 
+
+                }
 
             }
-            //This removes unwanted "undefined" texts from the page.
             if (typeof content !== 'undefined') {
-               document.getElementById("schedules").innerHTML = "<ul>" + content + "</ul>";
-            } else {
-                console.log("Tyhjää");
+                //This removes unwanted "undefined" texts from the page.
+                document.getElementById("schedules").innerHTML = "<ul>" + content + "</ul>";
+            }
+            if (output == "valitse") {
+                //If there is no selected theather, error message is printed and pulldown borders changes red.
+                txt = "<ul>" + "Valitse ensin teattari valikosta!" + "</ul>";
+                document.getElementById("schedules").innerHTML = txt.fontcolor("white");
+                document.getElementById("pullDown").style.borderColor = "red";
+            }
+            else {
+                //pass
             }
         }
     }
@@ -183,16 +192,22 @@ function findMovies(data) {
             //
             var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, genreSearch = '';
             var synopsisMovie = data;
+
             // alustetaan muuttuja tekstillä latauksen ajaksi
             var synopsis = "Odotappa hetkinen...";
             //console.log(synopsisData);
             for (j = 0; j < items.length; j++) {
                 // Haetaan nimi jolla verrataan haussa
                 name = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
+                //The user-entered keyword in searchfield, movie title, and genre are now converted to lowercase so that the search result finds something.
+                let namelower = name.toLowerCase();//Variable name is converted to lowercase
+                let xlower = x.toLowerCase();//Variable x, which is value from textfield, is converted to lowercase
                 // Haetaan kategoria, jolla verrataan haussa
                 genreSearch = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
+                genreSearchlower = genreSearch.toLowerCase(); //Variable genreSearch is converted to lowercase
                 //If title match searchfield text fully or partiatly, it will print movie details below in "contentbox" -div
-                if (name.match(x) || genreSearch.match(x)) {
+                if ((namelower.match(xlower) || genreSearchlower.match(xlower)) && xlower.length != "") {
+                    document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
@@ -202,16 +217,27 @@ function findMovies(data) {
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
-                        if (synopsisMovie[i].title == movie){
+                        if (synopsisMovie[i].title == movie) {
                             synopsis = synopsisMovie[i].synopsis;
                         } else {
-                            console.log("Skip");
-                            document.getElementById("moviesearch").style.borderColor = "red";
+                            //pass
                         }
 
                     }
                     item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
                     content += item;
+                }
+                if (xlower == "") {
+                    //If textfield is empty, alert user and changes textfield borders red.
+                    alert("Kirjoita tekstikenttään ensin jotain!");
+                    document.getElementById("moviesearch").style.borderColor = "red";
+                    break;
+                }
+                if (xlower != "" && j == 0) {
+                    //If textfield contains keyword, but there is no results. Printing message "no results" and chages textfield border back to normal if it was red.
+                    txt = "<ul>" + "Pahoittelut, ei hakutuloksia hakusanlla " + x + "." + "</ul>";
+                    document.getElementById("schedules").innerHTML = txt.fontcolor("white");
+                    document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
                 }
             }
             //This removes unwanted "undefined" texts from the page.
