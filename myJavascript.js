@@ -137,6 +137,7 @@ function getData(a) {
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
+                    time = time.replace("T", " ");
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
@@ -214,6 +215,7 @@ function findMovies(data) {
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
+                    time = time.replace("T", " ");
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
