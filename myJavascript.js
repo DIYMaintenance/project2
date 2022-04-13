@@ -229,7 +229,8 @@ function findMovies(data) {
                 }
                 if (xlower == "") {
                     //If textfield is empty, alert user and changes textfield borders red.
-                    alert("Kirjoita tekstikenttään ensin jotain!");
+                    txt = "<ul>" + "Kirjoita ensin jotain tekstikenttään. " + "</ul>";
+                    document.getElementById("schedules").innerHTML = txt.fontcolor("white");
                     document.getElementById("moviesearch").style.borderColor = "red";
                     break;
                 }
