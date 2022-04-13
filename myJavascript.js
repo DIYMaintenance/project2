@@ -145,13 +145,9 @@ function getData(a) {
                         }
 
                     }
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3><p>' + synopsis + '</p> + </a>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong>Teatteri: </strong><br>' + theathrename + '</p>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
+                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
                     content += item;
-
-                } else {
-                    //If film is not in theater, it will be skipped and details not shown.
-                    console.log("skipped");
-                }
+                } 
 
             }
             //This removes unwanted "undefined" texts from the page.
@@ -183,14 +179,17 @@ function findMovies(data) {
             // And since they are arrays, we use for loop to travel through them
             // I wanted to display results in a table so im creating table tags and table cells
             //
-            var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, synopsis, temp = '';
+            var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, genreSearch = '';
             var synopsisMovie = data;
+            var synopsis = "Odotappa hetkinen...";
             //console.log(synopsisData);
             for (j = 1; j < items.length; j++) {
-
+                // Haetaan nimi jolla verrataan haussa
                 name = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
+                // Haetaan kategoria, jolla verrataan haussa
+                genreSearch = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                 //If title match searchfield text fully or partiatly, it will print movie details below in "contentbox" -div
-                if (name.match(x)) {
+                if (name.match(x) || genreSearch.match(x)) {
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
@@ -200,19 +199,16 @@ function findMovies(data) {
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
-                        if (synopsisMovie[i].title.match(x)){
+                        if (synopsisMovie[i].title == movie){
                             synopsis = synopsisMovie[i].synopsis;
-
                         } else {
                             console.log("Skip");
+                            document.getElementById("moviesearch").style.borderColor = "red";
                         }
 
                     }
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a>' + '<p>' + synopsis + '</p>' + '<a href="' + feedlink + '">' + name + '</a>' + '<p>' + '<strong>Teatteri: </strong><br>' + theathrename + '</p>' + '<p>' + '<strong> Näytösaika: </strong><br>' + time + '</p>' + '<p class="genre">' + genre + '</p></div>';
+                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
                     content += item;
-                } else {
-                    //if not, then nothing is showed and textbox border goes red.
-                    document.getElementById("moviesearch").style.borderColor = "red";
                 }
             }
             //This removes unwanted "undefined" texts from the page.
