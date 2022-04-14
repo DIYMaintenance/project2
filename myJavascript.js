@@ -48,7 +48,7 @@ function loadSynopsis(b) {
 
 
 
-document.getElementById("movie1").addEventListener("click", findMovies);
+//document.getElementById("movie1").addEventListener("click", findMovies);
 
 // Load XML to memory
 function loadMenu() {
@@ -137,7 +137,7 @@ function getData(a) {
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
-                    time = time.replace("T", " ");
+                    time = time.replace("T", " " + '<br>');
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
@@ -150,7 +150,7 @@ function getData(a) {
 
                     }
 
-                    item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
+                    item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
                     content += item;
 
                 }
@@ -162,11 +162,10 @@ function getData(a) {
             }
             if (output == "valitse") {
                 //If there is no selected theather, error message is printed and pulldown borders changes red.
-                txt = "<ul>" + "Valitse ensin teattari valikosta!" + "</ul>";
+                txt = '<ul><p class="txtWarning">Valitse ensin teattari valikosta!</p></ul>';
                 document.getElementById("schedules").innerHTML = txt.fontcolor("white");
                 document.getElementById("pullDown").style.borderColor = "red";
-            }
-            else {
+            } else {
                 //pass
             }
         }
@@ -202,8 +201,8 @@ function findMovies(data) {
                 // Haetaan nimi jolla verrataan haussa
                 name = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                 //The user-entered keyword in searchfield, movie title, and genre are now converted to lowercase so that the search result finds something.
-                let namelower = name.toLowerCase();//Variable name is converted to lowercase
-                let xlower = x.toLowerCase();//Variable x, which is value from textfield, is converted to lowercase
+                let namelower = name.toLowerCase(); //Variable name is converted to lowercase
+                let xlower = x.toLowerCase(); //Variable x, which is value from textfield, is converted to lowercase
                 // Haetaan kategoria, jolla verrataan haussa
                 genreSearch = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                 genreSearchlower = genreSearch.toLowerCase(); //Variable genreSearch is converted to lowercase
@@ -215,7 +214,7 @@ function findMovies(data) {
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
-                    time = time.replace("T", " ");
+                    time = time.replace("T", " " + '<br>');
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
@@ -226,19 +225,19 @@ function findMovies(data) {
                         }
 
                     }
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div>';
+                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
                     content += item;
                 }
                 if (xlower == "") {
                     //If textfield is empty, alert user and changes textfield borders red.
-                    txt = "<ul>" + "Kirjoita ensin jotain tekstikenttään. " + "</ul>";
+                    txt = "<ul>" + '<p class="txtWarning">Kirjoita ensin jotain tekstikenttään.</p>' + "</ul>";
                     document.getElementById("schedules").innerHTML = txt.fontcolor("white");
                     document.getElementById("moviesearch").style.borderColor = "red";
                     break;
                 }
                 if (xlower != "" && j == 0) {
                     //If textfield contains keyword, but there is no results. Printing message "no results" and chages textfield border back to normal if it was red.
-                    txt = "<ul>" + "Pahoittelut, ei hakutuloksia hakusanlla " + x + "." + "</ul>";
+                    txt = "<ul>" + '<p class="txtWarning">Pahoittelut, ei hakutuloksia hakusanalla ' + x + "." + "</p></ul>";
                     document.getElementById("schedules").innerHTML = txt.fontcolor("white");
                     document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
                 }

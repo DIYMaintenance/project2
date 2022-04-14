@@ -127,4 +127,14 @@ a {
     background-color: white;
     transition-duration: 0.4s;
 }
-/* centering fields */
+/* Warning text when searchfield or list is empty */
+.txtWarning{
+    text-align: center;
+    width:90%;
+    color:red;
+}
+/* add time and genre to same line */
+.timeDiv {
+    display: flex;
+    justify-content: space-between;
+}
