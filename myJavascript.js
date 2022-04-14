@@ -124,6 +124,11 @@ function getData(a) {
             // I wanted to display results in a table so im creating table tags and table cells
             //
             //
+            // Get current time
+            var tanaa = new Date();
+            // Get only hours
+            var aika = tanaa.getHours();
+           
             var item, content, pic, name, rate, feedlink, movie, genre, time, synopsis = "";
             var synopsisMovie = a;
             for (j = 0; j < items.length; j++) {
@@ -138,6 +143,8 @@ function getData(a) {
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
                     time = time.replace("T", " " + '<br>');
+                    // slice to show only hour
+                    tunnit = time.slice(15, -6);
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
@@ -148,11 +155,14 @@ function getData(a) {
                             //pass
                         }
 
-                    }
-
+                    } // compare hours and print shows if is upcomming today
+                    if (tunnit > aika){
                     item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
                     content += item;
-
+                    }else{
+                        // Error if no shows today
+                        document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
+                    }
                 }
 
             }
@@ -193,6 +203,9 @@ function findMovies(data) {
             //
             var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, genreSearch = '';
             var synopsisMovie = data;
+            // Get current time
+            var tanaa = new Date();
+            var aika = tanaa.getHours();
 
             // alustetaan muuttuja tekstillä latauksen ajaksi
             var synopsis = "Odotappa hetkinen...";
@@ -215,6 +228,8 @@ function findMovies(data) {
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
                     time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
                     time = time.replace("T", " " + '<br>');
+                    // slice to show only hour
+                    tunnit = time.slice(15, -6);
                     theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue
                     //Find synopsis for movie.
                     for (i = 0; i < synopsisMovie.length; i++) {
@@ -224,9 +239,14 @@ function findMovies(data) {
                             //pass
                         }
 
-                    }
+                    }// compare hours and print shows if is upcomming today
+                    if (tunnit > aika){
                     item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
                     content += item;
+                    }else{
+                        // error if no shows today
+                    document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
+                }
                 }
                 if (xlower == "") {
                     //If textfield is empty, alert user and changes textfield borders red.
