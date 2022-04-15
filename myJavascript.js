@@ -125,10 +125,10 @@ function getData(a) {
             //
             //
             // Get current time
-            var tanaa = new Date();
+            var date = new Date();
             // Get only hours
-            var aika = tanaa.getHours();
-           
+            var aika = date.getHours();
+
             var item, content, pic, name, rate, feedlink, movie, genre, time, synopsis = "";
             var synopsisMovie = a;
             for (j = 0; j < items.length; j++) {
@@ -156,10 +156,10 @@ function getData(a) {
                         }
 
                     } // compare hours and print shows if is upcomming today
-                    if (tunnit > aika){
-                    item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
-                    content += item;
-                    }else{
+                    if (tunnit > aika) {
+                        item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
+                        content += item;
+                    } else {
                         // Error if no shows today
                         document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
                     }
@@ -172,7 +172,7 @@ function getData(a) {
             }
             if (output == "valitse") {
                 //If there is no selected theather, error message is printed and pulldown borders changes red.
-                txt = '<ul><p class="txtWarning">Valitse ensin teattari valikosta!</p></ul>';
+                txt = '<ul><p class="txtWarning">Valitse ensin teatteri valikosta!</p></ul>';
                 document.getElementById("schedules").innerHTML = txt.fontcolor("white");
                 document.getElementById("pullDown").style.borderColor = "red";
             } else {
@@ -204,8 +204,8 @@ function findMovies(data) {
             var theathrename, item, content, pic, name, rate, feedlink, movie, genre, time, genreSearch = '';
             var synopsisMovie = data;
             // Get current time
-            var tanaa = new Date();
-            var aika = tanaa.getHours();
+            var date = new Date();
+            var aika = date.getHours();
 
             // alustetaan muuttuja tekstillä latauksen ajaksi
             var synopsis = "Odotappa hetkinen...";
@@ -239,14 +239,14 @@ function findMovies(data) {
                             //pass
                         }
 
-                    }// compare hours and print shows if is upcomming today
-                    if (tunnit > aika){
-                    item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
-                    content += item;
-                    }else{
+                    } // compare hours and print shows if is upcomming today
+                    if (tunnit > aika) {
+                        item = document.getElementById("schedules").innerHTML = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
+                        content += item;
+                    } else {
                         // error if no shows today
-                    document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
-                }
+                        document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
+                    }
                 }
                 if (xlower == "") {
                     //If textfield is empty, alert user and changes textfield borders red.
