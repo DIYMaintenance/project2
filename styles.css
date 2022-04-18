@@ -91,9 +91,6 @@ a {
     color: rgb(58, 126, 41);
     text-align: left;
 }
-#schedules {
-    color: rgb(29, 29, 29);
-}
 /* Searchbox button */
 #movie1{   
     cursor: pointer;
@@ -137,4 +134,7 @@ a {
 .timeDiv {
     display: flex;
     justify-content: space-between;
+}
+#schedules {
+    color: rgb(29, 29, 29);
 }
