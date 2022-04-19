@@ -35,16 +35,14 @@ function loadSynopsis(b) {
             // If functions parameter is manualsearch run findMovies function with parameter data_array
             if (b == "ManualSearch") {
                 findMovies(data_array);
-                console.log("manual");
 
             }
             // If functions parameter is pulldown run getData function with parameter data_array
             if (b == "pulldown") {
                 getData(data_array)
-                console.log("pulldown");
                 // if something goes wrong print console "error"
             } else {
-                console.log("Error");
+                //pass
             }
         }
     }
@@ -76,12 +74,13 @@ function loadMenu() {
             //Calling function toUniqueArray and sends theatherlist to that function, and it will removes dublicate values from theatherlist.
             var theatherslistNoDublicats = toUniqueArray(theatherslist);
             var select = document.getElementById("pullDown");
-            //Adding theathers to dropdownmenu.
+            //For loop that adding theathers to dropdown menu.
             for (var i = 1; i < theatherslistNoDublicats.length; i++) {
                 var opt = theatherslistNoDublicats[i];
                 var el = document.createElement("option");
                 el.textContent = opt;
                 el.value = opt;
+                // Adding one more element to dropdown menu
                 select.appendChild(el);
             }
         }
