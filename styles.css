@@ -4,31 +4,37 @@ body {
 }
 
 h1 {
-    
+
     color: rgb(136, 136, 136);
     text-align: center;
 }
+
 h4 {
     color: rgb(58, 126, 41);
     text-align: center;
 }
+
 h3 {
     color: rgb(58, 126, 41);
     text-align: center;
     width: 80%;
 }
+
 p {
-   color:rgb(136, 136, 136);
-   padding:10px;
+    color: rgb(136, 136, 136);
+    padding: 10px;
 }
-.genre{
+
+.genre {
     text-align: right;
     color: rgb(58, 126, 41);
 }
+
 .dropdown {
     display: inline-block;
     position: relative;
 }
+
 
 #pageContent {
     background-color: rgb(29, 29, 29);
@@ -65,6 +71,7 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 /* Pulldown menu */
 #pullDown {
     font-family: 'Ubuntu', sans-serif;
@@ -73,37 +80,44 @@ p {
     width: 200px;
     margin-bottom: 10px;
 }
+
 /* Image Style */
-.image{
-    float:left;
+.image {
+    float: left;
     border-radius: 5px;
 }
+
 /*Rate image*/
-.rate{
+.rate {
     float: right;
 }
+
 /* Links */
 a {
-    text-decoration:none;
+    text-decoration: none;
 }
+
 /* Showtime */
 .time {
     color: rgb(58, 126, 41);
     text-align: left;
 }
+
 /* Searchbox button */
-#movie1{   
+#movie1 {
     cursor: pointer;
     font-family: 'Ubuntu', sans-serif;
     border-radius: 5px;
     margin-left: 5px;
     padding: 5px;
 }
+
 /* buttons hover effect */
 .buttons:hover {
     background-color: rgb(107, 2, 2);
     color: white;
 }
+
 /* get events button */
 #Button {
     cursor: pointer;
@@ -112,6 +126,7 @@ a {
     margin-left: 5px;
     padding: 5px;
 }
+
 /* Searchbox style */
 #moviesearch {
     font-family: 'Ubuntu', sans-serif;
@@ -119,22 +134,26 @@ a {
     padding: 5px;
     width: 200px;
 }
+
 /* buttons hover effect */
 .buttons {
     background-color: white;
     transition-duration: 0.4s;
 }
+
 /* Warning text when searchfield or list is empty */
-.txtWarning{
+.txtWarning {
     text-align: center;
-    width:90%;
-    color:red;
+    width: 90%;
+    color: red;
 }
+
 /* add time and genre to same line */
 .timeDiv {
     display: flex;
     justify-content: space-between;
 }
+
 #schedules {
     color: rgb(29, 29, 29);
 }
