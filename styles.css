@@ -68,6 +68,7 @@ p {
 /* Gradient text  */
 .text-gran {
     background: -webkit-linear-gradient(rgb(136, 136, 136), rgb(107, 2, 2));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
