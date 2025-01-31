@@ -135,6 +135,8 @@ function getData(a) {
                 name = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
                 //if the film is in a performance at that theater, its details will be printed id div "contentbox"
                 if (name == output) {
+                    // Error Handling If XML has changed or is invalid
+                    try {
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
                     pic = items[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
@@ -164,6 +166,11 @@ function getData(a) {
                         // error if no shows today
                         document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
                     }
+                } catch (error) {
+                    // Add Information to Console and Page if XML has changed or is invalid
+                    console.error("Error: XML has changed or is invalid:", error);
+                    document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Error: XML muuttunut tai virheellinen!</p></ul>'; // User-friendly error message
+                }
                 }
             }
         }
