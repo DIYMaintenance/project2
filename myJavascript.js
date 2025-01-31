@@ -136,7 +136,7 @@ function getData(a) {
                 //if the film is in a performance at that theater, its details will be printed id div "contentbox"
                 if (name == output) {
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
-                    pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
+                    pic = items[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
@@ -222,7 +222,7 @@ function findMovies(data) {
                 //If title match searchfield text fully or partiatly, it will print movie details below in "contentbox" -div
                 if ((namelower.match(xlower) || genreSearchlower.match(xlower)) && xlower.length != "") {
                     movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
-                    pic = items[j].getElementsByTagName('EventSmallImageLandscape').item(0).firstChild.nodeValue;
+                    pic = items[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
                     rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
                     feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
                     genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
