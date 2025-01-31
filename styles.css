@@ -87,11 +87,17 @@ p {
 .image {
     float: left;
     border-radius: 5px;
+    @media screen and (max-width: 1024px) {
+        width: 20%;
+    }
 }
 
 /*Rate image*/
 .rate {
     float: right;
+    @media screen and (max-width: 1024px) {
+        width: 10%;
+    }
 }
 
 /* Links */
@@ -103,7 +109,7 @@ a {
 .time {
     color: rgb(58, 126, 41);
     text-align: left;
-}
+ }
 
 /* Searchbox button */
 #movie1 {
@@ -154,6 +160,9 @@ a {
 .timeDiv {
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 1024px) {
+        font-size: 1.5vh;
+    }
 }
 
 #schedules {
