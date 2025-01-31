@@ -86,7 +86,6 @@ p {
 .image {
     float: left;
     border-radius: 5px;
-    margin-right: 10px;
 }
 
 /*Rate image*/
@@ -161,5 +160,6 @@ a {
 }
 .synopsis {
     align-items: end;
-    margin-left: 16%;
+    margin-left: 20%;
+    
 }
