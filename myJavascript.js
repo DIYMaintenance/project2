@@ -160,7 +160,7 @@ function getData(a) {
                     } // compare time and print shows if is upcomming today
                     if (tunnit >= aikaT && minuutit >= aikaM || tunnit > aikaT) {
                         // making new div with all movie information
-                        item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><div><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p></div><p>' + synopsis + '</p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
+                        item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><div><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br></div><div class="synopsis"><p>' + synopsis + '</p></div><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
                         content += item;
                     } else {
                         // error if no shows today
