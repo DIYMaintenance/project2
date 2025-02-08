@@ -137,40 +137,40 @@ function getData(a) {
                 if (name == output) {
                     // Error Handling If XML has changed or is invalid
                     try {
-                    movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
-                    pic = items[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
-                    rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
-                    feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
-                    genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
-                    time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
-                    // removing "T" from time that xml gives us
-                    time = time.replace("T", " " + '<br>');
-                    // slice time from xml to parsing only show when its starting
-                    tunnit = time.slice(15, -6);
-                    minuutit = time.slice(18, -3);
-                    theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
-                    //Find synopsis for movie.
-                    for (i = 0; i < synopsisMovie.length; i++) {
-                        if (synopsisMovie[i].title == movie) {
-                            synopsis = synopsisMovie[i].synopsis;
+                        movie = items[j].getElementsByTagName('Title').item(0).firstChild.nodeValue;
+                        pic = items[j].getElementsByTagName('EventSmallImagePortrait').item(0).firstChild.nodeValue;
+                        rate = items[j].getElementsByTagName('RatingImageUrl').item(0).firstChild.nodeValue;
+                        feedlink = items[j].getElementsByTagName('ShowURL').item(0).firstChild.nodeValue;
+                        genre = items[j].getElementsByTagName('Genres').item(0).firstChild.nodeValue;
+                        time = items[j].getElementsByTagName('dttmShowStart').item(0).firstChild.nodeValue;
+                        // removing "T" from time that xml gives us
+                        time = time.replace("T", " " + '<br>');
+                        // slice time from xml to parsing only show when its starting
+                        tunnit = time.slice(15, -6);
+                        minuutit = time.slice(18, -3);
+                        theathrename = items[j].getElementsByTagName('Theatre').item(0).firstChild.nodeValue;
+                        //Find synopsis for movie.
+                        for (i = 0; i < synopsisMovie.length; i++) {
+                            if (synopsisMovie[i].title == movie) {
+                                synopsis = synopsisMovie[i].synopsis;
 
+                            } else {
+                                //pass
+                            }
+                        } // compare time and print shows if is upcomming today
+                        if (tunnit >= aikaT && minuutit >= aikaM || tunnit > aikaT) {
+                            // making new div with all movie information
+                            item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><div><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br></div><div class="synopsis"><p>' + synopsis + '</p></div><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
+                            content += item;
                         } else {
-                            //pass
+                            // error if no shows today
+                            document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
                         }
-                    } // compare time and print shows if is upcomming today
-                    if (tunnit >= aikaT && minuutit >= aikaM || tunnit > aikaT) {
-                        // making new div with all movie information
-                        item = '<div id="contentBox" class="gradie center"><img class="image" src="' + pic + '"><img class="rate" src="' + rate + '"><div><a href="' + feedlink + '"><h3>' + movie + '</h3></a><br></div><div class="synopsis"><p>' + synopsis + '</p></div><p><strong>Teatteri: </strong><br><a href="' + feedlink + '">' + theathrename + '</a></p><div class="timeDiv"><p class="time"><strong> Näytösaika: </strong><br>' + time + '</p><p class="genre">' + genre + '</p></div></div>';
-                        content += item;
-                    } else {
-                        // error if no shows today
-                        document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Ei näytöksiä tänään!</p></ul>';
+                    } catch (error) {
+                        // Add Information to Console and Page if XML has changed or is invalid
+                        console.error("Error: XML has changed or is invalid:", error);
+                        document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Error: XML muuttunut tai virheellinen!</p></ul>'; // User-friendly error message
                     }
-                } catch (error) {
-                    // Add Information to Console and Page if XML has changed or is invalid
-                    console.error("Error: XML has changed or is invalid:", error);
-                    document.getElementById('schedules').innerHTML = '<ul><p class="txtWarning">Error: XML muuttunut tai virheellinen!</p></ul>'; // User-friendly error message
-                }
                 }
             }
         }
@@ -275,7 +275,7 @@ function findMovies(data) {
                     txt = "<ul>" + '<p class="txtWarning">Pahoittelut, ei hakutuloksia hakusanalla ' + x + "." + "</p></ul>";
                     document.getElementById("schedules").innerHTML = txt;
                     document.getElementById("moviesearch").style.borderColor = "inherit"; //Changes textfield bordercolor back to normal.
-                }else{
+                } else {
                     //pass
                 }
             }
