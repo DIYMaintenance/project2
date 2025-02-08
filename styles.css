@@ -40,8 +40,9 @@ p {
     padding: 10px;
     border-radius: 10px;
     width: 60%;
-    @media screen and (max-width: 1024px) {
-        width: 95%;
+
+    @media screen and (max-width: 680px) {
+        width: 94%;
     }
 }
 
@@ -54,16 +55,14 @@ p {
 }
 
 #contentBox {
-    margin: 10px;
+    margin-bottom: 10px;
     padding: 10px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 /* center div */
 .center {
     margin: auto;
-    width: 90%;
-    padding: 10px;
 }
 
 /* Gradient text  */
@@ -87,7 +86,8 @@ p {
 .image {
     float: left;
     border-radius: 5px;
-    @media screen and (max-width: 1024px) {
+
+    @media screen and (max-width: 680px) {
         width: 20%;
     }
 }
@@ -95,7 +95,8 @@ p {
 /*Rate image*/
 .rate {
     float: right;
-    @media screen and (max-width: 1024px) {
+
+    @media screen and (max-width: 680px) {
         width: 10%;
     }
 }
@@ -109,7 +110,7 @@ a {
 .time {
     color: rgb(58, 126, 41);
     text-align: left;
- }
+}
 
 /* Searchbox button */
 #movie1 {
@@ -160,16 +161,19 @@ a {
 .timeDiv {
     display: flex;
     justify-content: space-between;
-    @media screen and (max-width: 1024px) {
-        font-size: 1.5vh;
-    }
 }
 
 #schedules {
     color: rgb(29, 29, 29);
 }
+
+#schedules ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .synopsis {
     align-items: end;
     margin-left: 20%;
-    
 }
